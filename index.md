@@ -1,9 +1,9 @@
-# Your Name
+# Johan Athial
 Data Science Student  
 UNC Charlotte
 
 ## About Me
-Hi my name is Johan. I am a Data Scientist with a passion for AI and automation.
+I am a Data Scientist with a passion for AI and automation. I love learning about the latest technologies and how it is improving lives.
 
 ## Portfolio
 - [Blog](blog.md)
