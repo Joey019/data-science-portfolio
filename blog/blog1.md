@@ -1,6 +1,8 @@
 # Blog 1 
-What is Data Science to Me?
+## What is Data Science to Me?
 
-Write your reflection here.
-Data science goes beyond simply making predictions with data, it involves the entire lifecycle of data. This involves the capturing of raw data and the ethics
-surrounding it, which has been a major point of discussion in recent times.
+I think learning data science in an interdisciplinary context matters because data is not just numbers. Data often represents real people, their behaviors, thoughts, and experiences. It can represent animals, the environment, and our entire world. It is through data that we can understand more about each of these topics. However, understanding the connection between each domain and its data is crucial, as many times the data is only as useful as the context given to it. Because of this, knowing how to analyze data is important, but it is also important to understand the context behind that data and how the results might affect people. 
+
+Data science goes beyond simply making predictions with data, it involves the entire lifecycle of data. This involves the capturing of raw data and the ethics surrounding it, which has been a major point of discussion in recent times. Data is being generated constantly by people everywhere, with a lot of this data involving personal information. As data scientists, we must be careful of the source of our data. We must ensure when gathering data from people that they are actively aware of their data being collected and used. When utilizing personal data for predictive models, we must be careful to not introduce bias by including certain data such as race or gender. We must also ensure that data is protected once it is obtained, only accessible to those that need it.
+
+Through this course I hope to understand more about how data can be applied to real situations, while also realizing the limitations of data. I also hope to explore the ethics around data privacy. Overall, I hope this course helps me become better at both working with data and thinking about the broader impact that data-driven decisions can have on people and society.
