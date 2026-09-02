@@ -8,3 +8,4 @@ I am a Data Scientist with a passion for AI and automation. I love finding ineff
 ## Portfolio
 - [Blog](blog.md)
 - [Projects](projects.md)
+- [LinkedIn](https://www.linkedin.com/in/johan-athial/)
