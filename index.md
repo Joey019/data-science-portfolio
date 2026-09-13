@@ -8,3 +8,4 @@ I am a Data Science student with a passion for AI and automation. I love finding
 - [Blog](blog.md)
 - [Projects](projects.md)
 - [LinkedIn](https://www.linkedin.com/in/johan-athial/)
+- [Resume](resume.md)
