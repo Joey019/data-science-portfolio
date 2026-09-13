@@ -1,5 +1,4 @@
-# Blog 1 
-## What is Data Science to Me?
+# What is Data Science to Me?
 
 I think learning data science in an interdisciplinary context matters because data is not just numbers. Data often represents real people, their behaviors, thoughts, and experiences. It can represent animals, the environment, and our entire world. It is through data that we can understand more about each of these topics. However, understanding the connection between each domain and its data is crucial, as many times the data is only as useful as the context given to it. Because of this, knowing how to analyze data is important, but it is also important to understand the context behind that data and how the results might affect people. 
 
