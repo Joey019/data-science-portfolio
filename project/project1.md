@@ -1,18 +1,17 @@
-# Effects of Varying Speed Limits on Fatal Car Crashes
+# Posted Speed Limits and Severe Crash Rates in Mecklenburg County
 
 ## Problem Definition
 
-### Research Question:
-Among NCDOT state-maintained roads, not including interstate roads, in Mecklenburg County, how does the rate of fatal and serious-injury crashes vary by posted speed limit?
+### Research Question: Among NCDOT state-maintained roads, not including interstate roads, in Mecklenburg County, how does the rate of fatal and serious-injury crashes vary by posted speed limit?
 
-I am always fascinated by how many terrible drivers there are on the road, despite there being an entire process to determine your competency to operate an automobile. Therefore, I decided to study whether varying speed limits have an association with fatal car crashes. I decided to exclude interstate highways, as those have extremely high speed limits, which in turn will have a very high number of fatal automobile incidents. My goal was to understand where the most fatal accidents occurred on regular roads. With these findings, I believe we can have a better understanding of the dangers of driving as well as maybe finding ways to improve the safety of roads in Mecklenburg County
+Driving is something most people encounter every day, and severe crashes remain an important road-safety concern. Therefore, I decided to study whether roads with differenet speed limits experience different rates of sever car crashes. I decided to exclude interstate highways, as those have extremely high speed limits, which in turn will have a very high number of fatal automobile incidents. My goal was to understand where the most fatal accidents occurred on regular roads. With these findings, I believe we can have a better understanding of the dangers of driving as well as maybe finding ways to improve the safety of roads in Mecklenburg County
 
 
 ## Data Description
 
-For my data, I pulled from a variety of different ArcGIS APIs, each containing different mapping data. I had one table with records of every fatal or serious injury crash from 2016 to 2026 in North Carolina. I had another table with the different speed limits of state-maintained roads in North Carolina. Finally I had a table with basic county data for every county in North Carolina.
+For my data, I pulled from a variety of different ArcGIS APIs, each containing different mapping data. There was one table with records of every fatal or serious injury crash from 2016 to 2026 in North Carolina. There was another table with the different speed limits of state-maintained roads in North Carolina. Finally, there was a table with basic county data for every county in North Carolina. All of the tables from which I pulled data was built and shared by the North Carolina Department of Transportation (NCDOT), making them a reliable source to gather data from.
 
-The main variables I was interested in were the coordinates of roads and crashes for mapping purposes, and the posted speed limit for each road.
+The main variables I was interested in were the coordinates of roads and crashes for mapping purposes, and the posted speed limit for each road. Posted speed limit was operationalized using the "SpeedLimit" field associated with each state-maintained road segment. Severe crash rate was operationalized as the number of fatal and serious-injury crashes matched to a given speed-limit category divided by the total miles of roadway in that category.
 
 
 ## Data Cleaning and Preparation
@@ -21,26 +20,38 @@ Despite the APIs having data for all of North Carolina, my queries to the server
 
 In addition to Mecklenburg County, I also queried road data from the surrounding counties in order to find roads that crossed the border between counties, and then cut them off so that only the part that was in Mecklenburg County was kept. I also ensured that only records for state-maintained roads, not including interstate roads, was kept within the dataset.
 
-As for the crash data, there seemed to be a couple errors with the data where the location of a crash was no within the borders of Mecklenburg county. To deal with this issue, I decided to keep any crashes that were within a 50 foot radius of the Mecklenburg County border, as I believed that those crashes were within the margin of error for the coordinates provided by the NCDOT dataset and the mapping abilities of the GeoPandas library. Anything farther than the 50 foot limit was removed from the dataset.
+Because the original geographic data used latitude and longitude coordinates, I projected the GeoDataFrames to EPSG:2264, a North Carolina projected coordinate system measured in feet. This allowed distances, 50-foot tolerances, and road lengths to be calculated using appropriate spatial units.
+
+For the crash data, a small number of crashes classified by NCDOT as within Mecklenburg County had coordinates that fell slightly outside the Mecklenburg County boundary. To deal with this issue, I decided to keep any crashes that were within a 50 foot radius of the Mecklenburg County border, as I believed that those crashes were within the margin of error for the coordinates provided by the NCDOT dataset and the mapping abilities of the GeoPandas library. Anything farther than the 50 foot limit was removed from the dataset.
 
 Also the dataset I used for the speed limits of roads only contained information regarding roads that are maintained by the state, meaning any roads maintained by local governments was not included in the dataset. This meant that many crashes listed within the crash dataset did not have a road to connect to. I decided once gain on a 50 foot cutoff to connect a crash point to its nearest road. If a state-maintained road was not within 50 feet of a crash, that crash was removed form the dataset.
 
+
 ##  Visualizations and Insights
 
-The product of my analysis was a map of Mecklenburg County showcasing state-maintained roads, color-coded by the posted speed limit of that road. There are also the crash points that have occurred on those roads over the past decade.
+![Fatal and Serious-Injury Crashes by Posted Speed Limit in Mecklenburg County](../Severe_Crashes_Map.png)
+The first visualization maps fatal and serious-injury crashes across Mecklenburg County alongside state-maintained roads colored by posted speed limit. This provides geographic context for where severe crashes occurred and how those locations correspond to different speed-limit categories.
 
-I also have a bar plot of the number of fatal crashes that occurred on different speed limits. However this does not take into account, the different in road length of each speed limit. That's why I made another visual that took the ratio of fatal crashes per mile of road length for each speed limit. This gives a more balanced comparison between the different speed limits.
+![Severe Crash Rate by Posted Speed Limit](../Severe_Crash_Rate_Bar_Plot.png)
+Raw crash counts alone would not provide a fair comparison because Mecklenburg County contains different amounts of roadway at each posted speed limit. I therefore calculated the number of severe crashes per road mile for each speed-limit category. This normalizes the crash count by the amount of roadway represented in each category.
+
 
 ## Storytelling and Narrative 
 
-With the analysis that I performed, I was able to determine that there was a slight correlation between posted speed limit and fatal crashes, with fatal crashes per mile of road length increasing as posted speed limit increases.
+The results did not show a consistent relationship in which severe crash rates increased as posted speed limits increased. Crash rates generally increased between 25 and 40 mph, decreased slightly at 45 mph, increased substantially at 50 mph, and then decreased at 55 mph. This suggests that posted speed limit alone does not explain the variation in severe crash rates across the roads included in this analysis.
 
 However, there are some issues with the data that does provide some unusual conclusions. The fatal crash rate per road mile at 20 mph is almost at 4, towering over the rest of the speed limits. This is not because so many fatal crashes occur at 20 mph, but that there is one fatal crash at that speed limit, and this occurred because a car hit a pedestrian. Because there is only a quarter mile of state-maintained roads at 20 mph, the ratio is very high. This makes it easy to misunderstand what the bar plot is showing, thinking that there are many fatal crashes at 20 mph when that is not the case.
 
+
 ## Limitations, Ethics, and Reflection
 
-There are some limitations with this dataset. For one, this does not include all roads in Mecklenburg County, only state-maintained roads. While only 10% of the fatal crash data was removed due to not having a corresponding road in the roads dataset, this could still have an impact on the final conclusion of this research question, and as such needs to be taken into consideration.
+There are some limitations with this dataset. For one, this data does not include all roads in Mecklenburg County, only state-maintained roads. While only 10% of the fatal crash data was removed due to not having a corresponding road in the roads dataset, this could still have an impact on the final conclusion of this research question, and as such needs to be taken into consideration.
+
+Another limitation was the fact that the speed limit data was taken from a separate dataset than the crash data. There was no linking column to join the two data sets and confirm which crashes occurred on which roads. I had to do the best I could by using a 50-foot range to attach a crash to the nearest road, but this could inevitably lead the crash to be attached to the wrong road.
+
+Also, there are a number of factors that go into why a sever car crash can occur. It can range from poor weather conditions to impairment due to illegal substance use to high traffic volume. None of these factors were considered in this analysis, but they could absolutely affect the chances of a severe car crash. A lot of this data was available to me, but due to time constraints and the scope of my research question, I did not lead my analysis in that direction. I would be very interested in studying other potential factors of sever car crashes in a future analysis of this data.
+
 
 ## Code and Transparency 
 
-As I am not very familiar with ArcGIS or working with mapping data, there was the usage of ChatGPT's GPT-5.6 Sol to help generate code to manipulate the data using GeoPandas, and successfully pull from the ArcGIS API. The purpose of using ChatGPT was not to brainstorm ideas but to execute on my own ideas through the help of code generation. 
+As I am not very familiar with ArcGIS or working with mapping data, there was the usage of ChatGPT's GPT-5.6 Sol to help generate code to manipulate the data using GeoPandas, and successfully pull from the ArcGIS API. I also used ChatGPT to help enhance some of my visualizations by using techniques beyond the generic matplotlib funcitons. The purpose of using ChatGPT was not to brainstorm ideas but to execute on my own ideas through the help of code generation. 
