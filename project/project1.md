@@ -4,12 +4,18 @@
 
 ### Research Question: Among NCDOT state-maintained roads, not including interstate roads, in Mecklenburg County, how does the rate of fatal and serious-injury crashes vary by posted speed limit?
 
-Driving is something most people encounter every day, and severe crashes remain an important road-safety concern. Therefore, I decided to study whether roads with differenet speed limits experience different rates of sever car crashes. I decided to exclude interstate highways, as those have extremely high speed limits, which in turn will have a very high number of fatal automobile incidents. My goal was to understand where the most fatal accidents occurred on regular roads. With these findings, I believe we can have a better understanding of the dangers of driving as well as maybe finding ways to improve the safety of roads in Mecklenburg County
+Driving is something most people encounter every day, and severe crashes remain an important road-safety concern. Therefore, I decided to study whether roads with different speed limits experience different rates of sever car crashes. I decided to exclude interstate highways, as those have extremely high speed limits, which in turn will have a very high number of fatal automobile incidents. My goal was to understand where the most fatal accidents occurred on regular roads. With these findings, I believe we can have a better understanding of the dangers of driving as well as maybe finding ways to improve the safety of roads in Mecklenburg County.
 
 
 ## Data Description
 
-For my data, I pulled from a variety of different ArcGIS APIs, each containing different mapping data. There was one table with records of every fatal or serious injury crash from 2016 to 2026 in North Carolina. There was another table with the different speed limits of state-maintained roads in North Carolina. Finally, there was a table with basic county data for every county in North Carolina. All of the tables from which I pulled data was built and shared by the North Carolina Department of Transportation (NCDOT), making them a reliable source to gather data from.
+For my data, I pulled from a variety of different ArcGIS APIs, each containing different mapping data. All of the tables from which I pulled data was built and shared by the North Carolina Department of Transportation (NCDOT), making them a reliable source to gather data from.
+
+There was one table with records of every fatal or serious injury crash from 2016 to 2026 in North Carolina that held around 54,000 records. Each row recorded data about a specific fatal or serious injury crash, with very detailed records about the location, number of vehicles involved, alcohol involvement, etc.
+
+There was another table with the different speed limits of state-maintained roads in North Carolina with over 100,000 records. Each row was a segment of a road that held a specific speed limit. There could be multiple rows corresponding to the same road, but each row would hold the coordinates for a segment of that road with a different speed limit.
+
+Finally, there was a table with basic county data for all 100 counties in North Carolina. It essentially hold the coordinates to build the polygon structure of a county onto a map.
 
 The main variables I was interested in were the coordinates of roads and crashes for mapping purposes, and the posted speed limit for each road. Posted speed limit was operationalized using the "SpeedLimit" field associated with each state-maintained road segment. Severe crash rate was operationalized as the number of fatal and serious-injury crashes matched to a given speed-limit category divided by the total miles of roadway in that category.
 
@@ -18,9 +24,13 @@ The main variables I was interested in were the coordinates of roads and crashes
 
 Despite the APIs having data for all of North Carolina, my queries to the server focused on data solely for Mecklenburg County. This helped to narrow the number of records I pulled from the API and allow me to work with a more manageable dataset.
 
+Towards the end of the project, one of the ArcGIS API for the speed limit data became impossible to query from. Because I had previously retrieved and saved the data locally, I used the stored version of the dataset for the remainder of the analysis rather than making additional API requests.
+
 In addition to Mecklenburg County, I also queried road data from the surrounding counties in order to find roads that crossed the border between counties, and then cut them off so that only the part that was in Mecklenburg County was kept. I also ensured that only records for state-maintained roads, not including interstate roads, was kept within the dataset.
 
 Because the original geographic data used latitude and longitude coordinates, I projected the GeoDataFrames to EPSG:2264, a North Carolina projected coordinate system measured in feet. This allowed distances, 50-foot tolerances, and road lengths to be calculated using appropriate spatial units.
+
+There were no missing variables in any of the datasets.
 
 For the crash data, a small number of crashes classified by NCDOT as within Mecklenburg County had coordinates that fell slightly outside the Mecklenburg County boundary. To deal with this issue, I decided to keep any crashes that were within a 50 foot radius of the Mecklenburg County border, as I believed that those crashes were within the margin of error for the coordinates provided by the NCDOT dataset and the mapping abilities of the GeoPandas library. Anything farther than the 50 foot limit was removed from the dataset.
 
@@ -49,9 +59,21 @@ There are some limitations with this dataset. For one, this data does not includ
 
 Another limitation was the fact that the speed limit data was taken from a separate dataset than the crash data. There was no linking column to join the two data sets and confirm which crashes occurred on which roads. I had to do the best I could by using a 50-foot range to attach a crash to the nearest road, but this could inevitably lead the crash to be attached to the wrong road.
 
-Also, there are a number of factors that go into why a sever car crash can occur. It can range from poor weather conditions to impairment due to illegal substance use to high traffic volume. None of these factors were considered in this analysis, but they could absolutely affect the chances of a severe car crash. A lot of this data was available to me, but due to time constraints and the scope of my research question, I did not lead my analysis in that direction. I would be very interested in studying other potential factors of sever car crashes in a future analysis of this data.
+An important ethical consideration is avoiding conclusions that imply posted speed limit alone causes severe crashes. It can range from poor weather conditions to impairment due to illegal substance use to high traffic volume. None of these factors were considered in this analysis, but they could absolutely affect the chances of a severe car crash. A lot of this data was available to me, but due to time constraints and the scope of my research question, I did not lead my analysis in that direction. I would be very interested in studying other potential factors of sever car crashes in a future analysis of this data.
+
+Due to unforeseen circumstance, the API for the speed limit data became unavailable during the project and part of the analysis relied on a previously downloaded version of the data. As a result, any updates made to the source dataset after it was downloaded would not be reflected in this analysis.
 
 
 ## Code and Transparency 
 
 As I am not very familiar with ArcGIS or working with mapping data, there was the usage of ChatGPT's GPT-5.6 Sol to help generate code to manipulate the data using GeoPandas, and successfully pull from the ArcGIS API. I also used ChatGPT to help enhance some of my visualizations by using techniques beyond the generic matplotlib funcitons. The purpose of using ChatGPT was not to brainstorm ideas but to execute on my own ideas through the help of code generation. 
+
+The complete Python code and Jupyter Notebook used for this analysis
+are available [here](LINK-TO-NOTEBOOK).
+
+
+## Data Source & References
+
+- North Carolina Department of Transportation. (n.d.). NC fatal and serious injury crashes [Data set]. ArcGIS Online. https://www.arcgis.com/home/item.html?id=967bdaaadb4a4c1eb3e3d4e849b43719
+- North Carolina Department of Transportation. (n.d.). North Carolina speed limits map [Data set]. ArcGIS Online. https://www.arcgis.com/home/item.html?id=978abf2f2fe341c78f6d52636a60ebff
+- North Carolina Department of Transportation. (n.d.). NCDOT county boundaries [Data set]. ArcGIS Online. https://www.arcgis.com/home/item.html?id=d192da4d0ac249fa9584109b1d626286
