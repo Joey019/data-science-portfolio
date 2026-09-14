@@ -11,7 +11,7 @@ Driving is something most people encounter every day, and severe crashes remain 
 
 For my data, I pulled from a variety of different ArcGIS APIs, each containing different mapping data. All of the tables from which I pulled data was built and shared by the North Carolina Department of Transportation (NCDOT), making them a reliable source to gather data from.
 
-There was one table with records of every fatal or serious injury crash from 2016 to 2026 in North Carolina that held around 54,000 records. Each row recorded data about a specific fatal or serious injury crash, with very detailed records about the location, number of vehicles involved, alcohol involvement, etc.
+There was one table with records of every fatal or serious injury crash from 2016 to 2025 in North Carolina that held around 54,000 records. Each row recorded data about a specific fatal or serious injury crash, with very detailed records about the location, number of vehicles involved, alcohol involvement, etc.
 
 There was another table with the different speed limits of state-maintained roads in North Carolina with over 100,000 records. Each row was a segment of a road that held a specific speed limit. There could be multiple rows corresponding to the same road, but each row would hold the coordinates for a segment of that road with a different speed limit.
 
@@ -30,7 +30,7 @@ In addition to Mecklenburg County, I also queried road data from the surrounding
 
 Because the original geographic data used latitude and longitude coordinates, I projected the GeoDataFrames to EPSG:2264, a North Carolina projected coordinate system measured in feet. This allowed distances, 50-foot tolerances, and road lengths to be calculated using appropriate spatial units.
 
-There were no missing variables in any of the datasets.
+There were some missing coordinates from the crash dataset, and those rows were removed since the coordinates were an essential part of the analysis and mapping process.
 
 For the crash data, a small number of crashes classified by NCDOT as within Mecklenburg County had coordinates that fell slightly outside the Mecklenburg County boundary. To deal with this issue, I decided to keep any crashes that were within a 50 foot radius of the Mecklenburg County border, as I believed that those crashes were within the margin of error for the coordinates provided by the NCDOT dataset and the mapping abilities of the GeoPandas library. Anything farther than the 50 foot limit was removed from the dataset.
 
@@ -55,7 +55,7 @@ However, there are some issues with the data that does provide some unusual conc
 
 ## Limitations, Ethics, and Reflection
 
-There are some limitations with this dataset. For one, this data does not include all roads in Mecklenburg County, only state-maintained roads. While only 10% of the fatal crash data was removed due to not having a corresponding road in the roads dataset, this could still have an impact on the final conclusion of this research question, and as such needs to be taken into consideration.
+There are some limitations with this dataset. For one, this data does not include all roads in Mecklenburg County, only state-maintained roads. Over 50% of the crashes from the dataset were removed because they could not be mapped to a road within 50 feet. This would have a very high impact on the final conclusion of this analysis, and as such needs to be taken into consideration. For future analysis on this topic, a dataset with all roads in Mecklenburg County would be preferred.
 
 Another limitation was the fact that the speed limit data was taken from a separate dataset than the crash data. There was no linking column to join the two data sets and confirm which crashes occurred on which roads. I had to do the best I could by using a 50-foot range to attach a crash to the nearest road, but this could inevitably lead the crash to be attached to the wrong road.
 
@@ -68,8 +68,7 @@ Due to unforeseen circumstance, the API for the speed limit data became unavaila
 
 As I am not very familiar with ArcGIS or working with mapping data, there was the usage of ChatGPT's GPT-5.6 Sol to help generate code to manipulate the data using GeoPandas, and successfully pull from the ArcGIS API. I also used ChatGPT to help enhance some of my visualizations by using techniques beyond the generic matplotlib funcitons. The purpose of using ChatGPT was not to brainstorm ideas but to execute on my own ideas through the help of code generation. 
 
-The complete Python code and Jupyter Notebook used for this analysis
-are available [here](LINK-TO-NOTEBOOK).
+The Jupyter Notebook used for this analysis is available [here](Research.ipynb).
 
 
 ## Data Source & References
