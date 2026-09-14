@@ -39,13 +39,13 @@ Also the dataset I used for the speed limits of roads only contained information
 
 ##  Visualizations and Insights
 
-![Fatal and Serious-Injury Crashes by Posted Speed Limit in Mecklenburg County](../Severe_Crashes_Map.png)
+![Fatal and Serious-Injury Crashes by Posted Speed Limit in Mecklenburg County](Severe_Crashes_Map.png)
 *Figure 1. Fatal and serious-injury crashes and posted speed limits on selected
 state-maintained roads in Mecklenburg County.*
 
 The first visualization maps fatal and serious-injury crashes across Mecklenburg County alongside state-maintained roads colored by posted speed limit. This provides geographic context for where severe crashes occurred and how those locations correspond to different speed-limit categories.
 
-![Severe Crash Rate by Posted Speed Limit](../Severe_Crash_Rate_Bar_Plot.png)
+![Severe Crash Rate by Posted Speed Limit](Severe_Crash_Rate_Bar_Plot.png)
 *Figure 2. Fatal and serious-injury crashes per road mile by posted speed limit.*
 
 Raw crash counts alone would not provide a fair comparison because Mecklenburg County contains different amounts of roadway at each posted speed limit. I therefore calculated the number of severe crashes per road mile for each speed-limit category. This normalizes the crash count by the amount of roadway represented in each category.
@@ -73,7 +73,7 @@ Due to unforeseen circumstance, the API for the speed limit data became unavaila
 
 As I am not very familiar with ArcGIS or working with mapping data, there was the usage of ChatGPT's GPT-5.6 Sol to help generate code to manipulate the data using GeoPandas, and successfully pull from the ArcGIS API. I also used ChatGPT to help enhance some of my visualizations by using techniques beyond the generic matplotlib functions. The purpose of using ChatGPT was not to brainstorm ideas but to execute on my own ideas through the help of code generation. 
 
-The Jupyter Notebook used for this analysis is available [here](Research.html).
+The Jupyter Notebook used for this analysis is available [here](Research.ipynb).
 
 
 ## Data Source & References
