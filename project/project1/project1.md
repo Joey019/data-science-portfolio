@@ -73,7 +73,7 @@ Due to unforeseen circumstance, the API for the speed limit data became unavaila
 
 As I am not very familiar with ArcGIS or working with mapping data, there was the usage of ChatGPT's GPT-5.6 Sol to help generate code to manipulate the data using GeoPandas, and successfully pull from the ArcGIS API. I also used ChatGPT to help enhance some of my visualizations by using techniques beyond the generic matplotlib functions. The purpose of using ChatGPT was not to brainstorm ideas but to execute on my own ideas through the help of code generation. 
 
-The Jupyter Notebook used for this analysis is available [here](Research.ipynb).
+The Jupyter Notebook used for this analysis is available [here](Research.html).
 
 
 ## Data Source & References
