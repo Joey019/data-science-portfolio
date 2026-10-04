@@ -1,0 +1,13 @@
+# Project gallery metadata.
+# To add a new project: add a new entry here, create a folder under /project/<slug>/,
+# and add an index.md there with `layout: project` front matter (see project1 as an example).
+# "teaser" and "tags" below are drawn directly from the project write-up's own text —
+# nothing here is invented. Leave tags/image/repo blank and they simply won't render.
+
+- title: "Posted Speed Limits and Severe Crash Rates in Mecklenburg County"
+  slug: project1
+  url: /project/project1/project1.html
+  image: /project/project1/Severe_Crashes_Map.png
+  repo: https://github.com/Joey019/data-science-portfolio/blob/main/project/project1/Research.ipynb
+  teaser: "Among NCDOT state-maintained roads, not including interstate roads, in Mecklenburg County, how does the rate of fatal and serious-injury crashes vary by posted speed limit?"
+  tags: [Python, GeoPandas, "ArcGIS API", "Jupyter Notebook", Matplotlib]

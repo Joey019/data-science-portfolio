@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<div class="project-meta">
+  <a href="{{ '/projects.html' | relative_url }}">&larr; All Projects</a>
+  {% if page.tags %}
+  <span class="tag-list">
+    {% for t in page.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+  </span>
+  {% endif %}
+  {% if page.repo %}<a href="{{ page.repo }}" target="_blank" rel="noopener">View code on GitHub &rarr;</a>{% endif %}
+</div>
+
+{{ content }}
