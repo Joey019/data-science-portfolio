@@ -20,4 +20,3 @@ title: Experience
   </li>
 </ul>
 
-<p class="placeholder">[PLACEHOLDER: Add additional experience entries — research assistantships, relevant coursework projects, or leadership roles]</p>
