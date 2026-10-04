@@ -1,4 +1,40 @@
-title: Data Science Portfolio
-description: Documenting my learning in Data Science
-theme: jekyll-theme-minimal
+title: Johan Athial
+description: Data Science student at UNC Charlotte — portfolio of projects, research, and writing in data science, machine learning, and analytics.
+url: "https://joey019.github.io"
+baseurl: "/data-science-portfolio"
+
+author:
+  name: Johan Athial
+  linkedin: "https://www.linkedin.com/in/johan-athial/"
+  github: "https://github.com/Joey019"
+  resume: "/Johan_Athial_Resume.pdf"
+
 show_downloads: false
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Primary site navigation. Edit this list to add/remove/reorder nav items.
+nav:
+  - title: Home
+    url: /
+  - title: Projects
+    url: /projects.html
+  - title: Experience
+    url: /experience.html
+  - title: Blog
+    url: /blog.html
+  - title: Resume
+    url: /resume.html
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "page"
+
+exclude:
+  - README.md
+  - project/project1/Research.ipynb
+  - project/project1/Research.html

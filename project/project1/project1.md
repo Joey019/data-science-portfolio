@@ -1,3 +1,10 @@
+---
+layout: project
+title: Posted Speed Limits and Severe Crash Rates in Mecklenburg County
+tags: [Python, GeoPandas, "ArcGIS API", "Jupyter Notebook", Matplotlib]
+repo: https://github.com/Joey019/data-science-portfolio/blob/main/project/project1/Research.ipynb
+---
+
 # Posted Speed Limits and Severe Crash Rates in Mecklenburg County
 
 ## Problem Definition
@@ -39,14 +46,18 @@ Also the dataset I used for the speed limits of roads only contained information
 
 ##  Visualizations and Insights
 
+<figure markdown="1">
 ![Fatal and Serious-Injury Crashes by Posted Speed Limit in Mecklenburg County](Severe_Crashes_Map.png)
 *Figure 1. Fatal and serious-injury crashes and posted speed limits on selected
 state-maintained roads in Mecklenburg County.*
+</figure>
 
 The first visualization maps fatal and serious-injury crashes across Mecklenburg County alongside state-maintained roads colored by posted speed limit. This provides geographic context for where severe crashes occurred and how those locations correspond to different speed-limit categories.
 
+<figure markdown="1">
 ![Severe Crash Rate by Posted Speed Limit](Severe_Crash_Rate_Bar_Plot.png)
 *Figure 2. Fatal and serious-injury crashes per road mile by posted speed limit.*
+</figure>
 
 Raw crash counts alone would not provide a fair comparison because Mecklenburg County contains different amounts of roadway at each posted speed limit. I therefore calculated the number of severe crashes per road mile for each speed-limit category. This normalizes the crash count by the amount of roadway represented in each category.
 
