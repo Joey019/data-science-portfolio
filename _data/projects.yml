@@ -10,4 +10,4 @@
   image: /project/project1/Severe_Crashes_Map.png
   repo: https://github.com/Joey019/data-science-portfolio/blob/main/project/project1/Research.ipynb
   teaser: "Among NCDOT state-maintained roads, not including interstate roads, in Mecklenburg County, how does the rate of fatal and serious-injury crashes vary by posted speed limit?"
-  tags: [Python, GeoPandas, "ArcGIS API", "Jupyter Notebook", Matplotlib]
+  tags: [Python, GeoPandas, "ArcGIS API", Matplotlib]
