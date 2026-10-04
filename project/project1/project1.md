@@ -1,7 +1,7 @@
 ---
 layout: project
 title: Posted Speed Limits and Severe Crash Rates in Mecklenburg County
-tags: [Python, GeoPandas, "ArcGIS API", "Jupyter Notebook", Matplotlib]
+tags: [Python, GeoPandas, "ArcGIS API", Matplotlib]
 repo: https://github.com/Joey019/data-science-portfolio/blob/main/project/project1/Research.ipynb
 ---
 
