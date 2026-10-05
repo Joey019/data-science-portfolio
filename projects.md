@@ -7,10 +7,10 @@ title: Projects
 This section documents my data science projects, research questions, and data stories I create throughout the semesters.
 
 ---
-## Project 1
+{% for project in site.data.projects %}
+## Project {{ forloop.index }}
 
 <div class="card-grid">
-{% for project in site.data.projects %}
 <div class="card project-card">
   {% if project.image %}
   <div class="project-card-img">
@@ -31,9 +31,8 @@ This section documents my data science projects, research questions, and data st
     </div>
   </div>
 </div>
-{% endfor %}
 </div>
 
-<p class="placeholder">[PLACEHOLDER: Add next project — see <code>_data/projects.yml</code> and create a new folder under <code>/project/&lt;slug&gt;/</code>]</p>
+{% endfor %}
 
 <!-- Original link preserved for reference: [Posted Speed Limits and Severe Crash Rates in Mecklenburg County](project/project1/project1.md) -->

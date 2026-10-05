@@ -38,7 +38,7 @@ I am a Data Science student with a passion for AI and automation. I love finding
 
 <div class="section" markdown="1">
 
-## Featured Project
+## Featured Projects
 
 <div class="card-grid">
 {% for project in site.data.projects limit:2 %}

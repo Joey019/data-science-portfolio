@@ -49,14 +49,14 @@ The clearest descriptive pattern was the difference between practice and exam sc
 Practice performance differed substantially across groups, while average independent exam performance was much closer. This led me to focus on the independent exam as the prediction target as assisted performance alone would give an incomplete picture of the effects of generative AI on learning.
 
 <figure markdown="1">
-![Practice-score distribution by treatment group](Assisted Exam by Treatement Group.png)
+![Practice-score distribution by treatment group](Assisted_Exam_by_Treatment_Group.png)
 *Figure 1. Distribution of the assisted practice exam score based on the treatment group*
 </figure>
 
 The independent exam scores varied widely. Their overall mean was 34.61%, their median was 30.00%, and values ranged from 0% to 100%.
 
 <figure markdown="1">
-![Independent exam-score distributio](Independent Exam by Treatement Group.png)
+![Independent exam-score distributio](Independent_Exam_By_Treatment_Group.png)
 *Figure 2. Distribution of the unassisted exam score based on the treatment group*
 </figure>
 
