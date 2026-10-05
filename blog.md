@@ -4,7 +4,7 @@ title: Blog
 ---
 
 # Blog
-Thoughts,ideas,and lessons from my journey in tech and data.
+Thoughts, ideas, and lessons from my journey in tech and data.
 <div class="card-grid">
 <div class="card">
 <h3><a href="blog/blog1.md">What is Data Science to Me?</a></h3>
