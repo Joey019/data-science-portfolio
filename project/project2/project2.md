@@ -1,7 +1,7 @@
 ---
 layout: project
 title: Effects of Generative AI on Student Learning
-tags: [Python, Scikit-learn, Machine Learning, Seaborn]
+tags: [Python, Scikit-learn, Machine Learning, Gradient Boost, Seaborn]
 repo: https://github.com/Joey019/data-science-portfolio/blob/main/project/project2/Research.ipynb
 ---
 
@@ -13,15 +13,15 @@ Technology has slowly become an integral part of the education system. Many stud
 
 As soon as generative AI became mainstream, many students started to utilize it to help them in their classes. Some used it as a tool for learning, taking advantage of its vast knowledge to learn from it. There are many cases where generative AI is able to explain complicated problems in a much simpler way. Others used it as a tool for cheating, letting generative AI do their homework, write papers, and even take exams for them. With how widely technology has been integrated into education, it is very easy to use generative AI to go through class work and assignments without actually learning anything.
 
-I began this project with the question: **Does generative AI help students learn and improve their academic performance?** To investigate this question, I explored data from a high-school mathematics experiment in Turkey and built a regression model to predict students’ independent exam scores.
+### Research Question: Does generative AI help students learn and improve their academic performance?
+
+I began this project to answer this research question. In order to get a better understanding, I explored data from a high-school experiment in Turkey and built a regression model to predict students’ independent exam scores.
 
 The analysis of this data had one main goal: examine how practice and exam performance differ across AI treatment groups, and determine which features help predict exam performance. These findings could help educators and researchers understand what to measure when evaluating AI-based learning.
 
-Previous research shows why the distinction matters. Bastani et al. (2025), whose experiment supplied this dataset, found that unrestricted AI assistance could improve assisted performance while harming subsequent independent performance. In another setting, Kestin et al. (2025) found that a deliberately designed AI tutor improved learning relative to an active-learning class in college physics. These studies involved different students and instructional designs, so their results should not be treated as interchangeable. Together, they motivate examining how an AI tool is used and how learning is assessed. UNESCO’s guidance also emphasizes human oversight, privacy, and educational purpose when adopting generative AI (Miao & Holmes, 2023).
-
 ## 2. Understanding the Data
 
-I used the _ai-learning_ dataset from the Carnegie Mellon University Statistics & Data Science Data Repository (Sagasta Pereira, 2026). It comes from a mathematics study involving Turkish high-school students. The dataset contains **3,255 student-session observations, 943 unique students, and 31 original columns**. A row represents a student’s results in one session, and a student can appear in up to four sessions.
+I used the _ai-learning_ dataset from the Carnegie Mellon University Statistics & Data Science Data Repository (Sagasta Pereira, 2026). It comes from a study involving Turkish high-school students in their math class. The dataset contains **3,255 student-session observations, 943 unique students, and 31 original columns**. A row represents a student’s results in one session, and a student can appear in up to four sessions.
 
 The three treatment groups are control, vanilla AI, and augmented AI. The control group had no access to generative AI in theri sessions. The vanilla group had access to a standard ChatGPT interface to help answer questions. the augmented tool had access to an enhanced ChatGPT interface that was designed to help specifically with the topics covered in the session. Treatment was assigned at the classroom level, and classrooms retained their assignments across sessions. A student could only be a part of the same group across all session.
 
@@ -46,21 +46,21 @@ The clearest descriptive pattern was the difference between practice and exam sc
 | Vanilla AI      |              49.48% |                      33.80% |
 | Augmented AI    |              67.45% |                      35.13% |
 
-Practice performance differed substantially across groups, while average independent exam performance was much closer. This led me to focus on the independent exam as the prediction target as assisted performance alone would give an incomplete picture of the effects of generative AI on learning.
+Practice performance differed significantly across groups, while average independent exam performance was much closer. This led me to focus on the independent exam as the prediction target as assisted performance alone would give an incomplete picture of the effects of generative AI on learning.
 
 <figure markdown="1">
-![Practice-score distribution by treatment group](Assisted_Exam_by_Treatment_Group.png)
+![Practice-score distribution by treatment group](Assisted_Exam_by_Treatement_Group.png)
 *Figure 1. Distribution of the assisted practice exam score based on the treatment group*
 </figure>
 
 The independent exam scores varied widely. Their overall mean was 34.61%, their median was 30.00%, and values ranged from 0% to 100%.
 
 <figure markdown="1">
-![Independent exam-score distributio](Independent_Exam_By_Treatment_Group.png)
+![Independent exam-score distributio](Independent_Exam_by_Treatement_Group.png)
 *Figure 2. Distribution of the unassisted exam score based on the treatment group*
 </figure>
 
-**Missing Data**
+### Missing Data
 
 | Variables    | Missing Values |
 | ------------ | -------------- |
@@ -92,7 +92,7 @@ Because students appeared repeatedly, I split the data by student using `GroupSh
 
 ## 5. Model Comparison & Hyperparameter Tuning
 
-I established a mean-prediction baseline model using `DummyRegressor`, then compared Linear Regression, Ridge, Random Forest, and Gradient Boosting. Linear models provided a straightforward reference, while tree ensembles could capture nonlinear relationships.
+I created a mean-prediction baseline model using `DummyRegressor`, then compared Linear Regression, Ridge, Random Forest, and Gradient Boosting. Linear models provided a straightforward reference, while tree ensembles could capture nonlinear relationships.
 
 I evaluated performance using three regression metrics:
 
@@ -112,9 +112,9 @@ The supplied survey-model results were:
 
 All trained models outperformed the baseline. The tree ensembles also achieved lower errors than the linear models in this comparison. This is consistent with useful nonlinear structure, although the score differences alone do not determine which interactions account for the improvement.
 
-An earlier comparison suggested a small improvement when surveys were included. However, that comparison used different observations, and the latest workflow also changes the feature set. I therefore treat the survey result as exploratory rather than an isolated estimate of how much surveys improve prediction. A controlled comparison would use the same students, rows, and folds for both feature sets.
+A comparison was done between a model that included the survey questions and a model that did not include the questions as features. Both models were built on a dataset that had dropped rows with missing values for the survey questions involved. The models with the survey questions as features performed slightly better, around 1 MAE lower, so it was decided to keep the questions as features in the model.
 
-Gradient Boosting was the strongest candidate in the updated initial comparison on all three metrics. I then tuned it using `GridSearchCV`, minimizing student-grouped cross-validation RMSE within the training set. The search evaluated 375 parameter combinations across five folds, for 1,875 validation fits, followed by refitting the selected pipeline.
+Gradient Boosting was the strongest candidate in the updated initial comparison on all three metrics. I then tuned it using `GridSearchCV`, minimizing the RMSE within the training set. The search evaluated 375 parameter combinations across five folds, for 1,875 validation fits, followed by refitting the selected pipeline.
 
 | Selected parameter               | Value |
 | -------------------------------- | ----: |
@@ -123,12 +123,81 @@ Gradient Boosting was the strongest candidate in the updated initial comparison 
 | Maximum tree depth               |     4 |
 | Minimum samples per leaf         |     5 |
 
-The selected model achieved a tuning CV RMSE of **0.1909**. On the test split of 573 observations from 186 students, its reported results were:
+The selected model achieved an averaged cross validation RMSE of **0.1909**. On the test split of 573 observations from 186 students, its reported results were:
 
-## 6. Model Interpretation
+| Metric | Final test result |
+| ------ | ----------------: |
+| R²     |            0.5445 |
+| MAE    |            0.1532 |
+| RMSE   |            0.1934 |
 
-## 7. What These Findings Mean—and Their Limits
+The test RMSE was close to the cross validation RMSE, differing by approximately 0.0025 score units, or 0.25 percentage points. This is encouraging, as it means the model was not overfitted and can be used for inferencing with expectations of similar results.
 
+The final test MAE corresponds to an average absolute error of **15.32 percentage points**. Test R² was approximately 0.54, meaning the model accounted for about 54% of test-score variation relative to a constant prediction of that test set’s mean. This still leaves substantial uncertainty in individual predictions.
+
+For interpretation, an MAE of 0.15 means an average absolute error of 15 percentage points on this score scale. It does not mean the model is “85% accurate.”
+
+<figure markdown="1">
+![Actual versus predicted exam scores](Actual_vs._Predicted_Exam_Score.png)
+*Figure 3. Scatter plot of actual vs. predicted exam scores with a 45 degree line showing where perfectly predicted points would land*
+</figure>
+
+Predictions generally increased with actual scores, but the plot shows considerable spread. observations with a score of zero were often assigned positive predictions, while observations of perfect exam scores were generally predicted below 1. This suggests a trend toward middle scores and difficulty predicting extreme outcomes.
+
+## 6. Model Evaluation & Interpretation
+
+I used permutation importance to investigate which inputs supported the final model’s predictions. This method shuffles one input at a time and measures the resulting decrease in predictive performance.
+
+The supplied chart ranks **prior GPA** first, followed by **session, practice exam score, grade level, Survey Q2, Augmented AI indicator, and honors indicator**. This suggests that academic background and session context provided important predictive information. There was a slight bit of importance placed on whether a student was in the Augmented AI group, but it was not as high as others. Q2 also asks students how well they believe they performed on the quiz, so its importance must be taken into account with the fact that it was asked after the exam was taken.
+
+<figure markdown="1">
+![Permutation Importance Chart](Permutation_Importance_Bar_Chart.png)
+*Figure 4. Permutation Importance chart in descending order of the features importance*
+</figure>
+
+Permutation importance was calculated on the final Gradient Boosting pipeline using the test split, RMSE scoring, and ten repetitions.
+
+| Feature                         | Mean increase in RMSE | SD across shuffles |
+| ------------------------------- | --------------------: | -----------------: |
+| Previous GPA                    |                0.0781 |             0.0040 |
+| Session                         |                0.0269 |             0.0029 |
+| Practice score                  |                0.0177 |             0.0025 |
+| Grade level                     |                0.0165 |             0.0034 |
+| Perceived quiz performance (Q2) |                0.0110 |             0.0025 |
+
+For example, shuffling prior GPA increased RMSE by about 7.81 percentage points on average. These increases are neither shares of explained variance nor treatment effects. The SD describes variation across shuffles, not a confidence interval accounting for repeated students.
+
+Importance indicates how the fitted model uses a feature; it does not mean causation or show whether increasing that feature increases the predicted score. Correlated predictors can also share information, reducing the apparent importance of individual features. A low treatment-indicator importance therefore does not prove that AI had no effect.
+
+Session importance motivated a follow-up question: **Did students’ exam scores change over successive sessions, and did those patterns differ by treatment group?**
+
+<figure markdown="1">
+![Exam score by session and treatment](Exam_Score_by_Session_and_Treatment_Group.png)
+*Figure 5. Mean independent exam score by session and treatment group*
+</figure>
+
+| Session | Mean independent exam score | Recorded observations |
+| ------- | --------------------------: | --------------------: |
+| 1       |                      40.28% |                   852 |
+| 2       |                      40.93% |                   791 |
+| 3       |                      31.31% |                   834 |
+| 4       |                      25.51% |                   778 |
+
+The overall mean was similar in Sessions 1 and 2, and then lower in Sessions 3 and 4. Session 4’s mean was 14.76 percentage points below Session 1’s. The plot showed lower Session 4 averages than Session 1 in all three groups, although the trajectories differed. For example, control performance peaked in Session 2, while vanilla AI’s mean changed little between Sessions 3 and 4.
+
+I could not conclude why the relationships between exam scores and sessions were like this. My best guesses are that later sessions may cover different material or have higher difficulty, which lead to lower exam scores.
+
+## 7. Final Thoughts & Limits
+
+The results show why evaluating AI-based learning requires careful thought. In this dataset, the large differences in practice exam scores were followed by much smaller differences in raw exam averages. The predictive results also suggest that students’ academic background and session context are useful for understanding performance.
+
+The tuned Gradient Boosting model achieved a reported test R² of 0.5445 and MAE of 15.32 percentage points. Session averages declined in the later assessments, but that descriptive pattern cannot establish a decline in learning or identify its cause.
+
+Several limitations affect how these findings should be used. The study represents a particular school, in a particular country, using a particular teaching style. Performance somewhere else may differ. Excluding the incomplete surveys can also introduce selection bias. Surveys are self-reported, and post-exam responses restrict when the survey model could be used. It would be nice to have a more complete set of survey responses, as well as more questions that could delve deeper into how the students use generative AI for school.
+
+Bastani et al. (2025), whose experiment supplied this dataset, found that unrestricted AI assistance could improve assisted performance while harming subsequent independent performance. In another setting, Kestin et al. (2025) found that a deliberately designed AI tutor improved learning relative to an active-learning class in college physics. These studies involved different students and instructional designs, so their results should not be treated as interchangeable. Together, they motivate examining how an AI tool is used and how learning is assessed. UNESCO’s guidance also emphasizes human oversight, privacy, and educational purpose when adopting generative AI (Miao & Holmes, 2023).
+
+In the end, the model should not determine grades, restrict opportunities, or define the students’ ability. Educational use would require stronger validation, privacy safeguards, and evaluation of errors across relevant student groups. Individual student identifiers should not appear in public prediction examples.
 
 ## References & Code
 
