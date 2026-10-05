@@ -4,7 +4,7 @@ title: Projects
 ---
 
 # Projects
-This section documents my data science projects, research questions, and data stories I have created
+A showcase of my work,from ideas to implementation.
 
 ---
 {% for project in site.data.projects %}
