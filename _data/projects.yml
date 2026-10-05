@@ -15,7 +15,7 @@
 - title: "Effects of Generative AI on Student Learning"
   slug: project2
   url: /project/project2/project2.html
-  image: /project/project2/Actual_vs._Predicted_Exam_Score.png
+  image: /project/project2/Exam_Score_by_Sessions_and_Treatment_Group.png
   repo: https://github.com/Joey019/data-science-portfolio/blob/main/project/project2/Research.ipynb
   teaser: "Does generative AI help students learn and improve their academic performance?"
-  tags: [Python, Scikit-learn, "Machine Learning", Seaborn]
+  tags: [Python, Scikit-learn, "Machine Learning", "Gradient Boost", Seaborn]
