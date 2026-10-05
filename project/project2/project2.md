@@ -32,7 +32,7 @@ Two scores are important for this analysis:
 | `Part2Tot` | Assisted practice score; used as a predictor |
 | `Part3Tot` | Unassisted exam score; the prediction target |
 
-Other available features describe prior GPA, grade level, study habits, educational support, household characteristics, and students’ survey responses. Both scores are recorded as proportions, so a value of 0.70 corresponds to 70% of the available score. All of the continuous data has been standarized to a value between 0 and 1, while most other count data is realtively low (below 10).
+Other available features describe prior GPA, grade level, study habits, educational support, household characteristics, and students’ survey responses. Both scores are recorded as proportions, so a value of 0.70 corresponds to a 70% on the exam. All of the continuous data has been standarized to a value between 0 and 1, while most other count data is realtively low (below 10).
 
 There are 5 survey questions included in the data that were asked after the students took the unassisted exam after each session. The survey covered topic related to the study session as well as the students' perception of their exam performance.
 
@@ -78,7 +78,7 @@ The missing GPA values persisted across all sessions for the affected students. 
 
 ## 4. Data Preparation & Feature Selection
 
-There were some survey responses that were spelled slighlty differently or had different capitalization, so I standardized survey responses so equivalent responses were treated as the same category. The uninterpretable responses were converted to missing values.
+There were some survey responses that were spelled slightly different or had mismatched capitalization, so I standardized survey responses so equivalent responses were treated as the same category. The uninterpretable responses were converted to missing values.
 
 Prior GPA was filled using median imputation, with an additional indicator recording whether GPA had been missing. This kept those observations without treating an imputed value as an original measurement from the expirement. Session was one-hot encoded, allowing the model to note differences in session performance. Selected survey responses were ordinal encoded in their response order. The remaining selected numeric variables were passed through without scaling.
 
@@ -187,23 +187,21 @@ The overall mean was similar in Sessions 1 and 2, and then lower in Sessions 3 a
 
 I could not conclude why the relationships between exam scores and sessions were like this. My best guesses are that later sessions may cover different material or have higher difficulty, which lead to lower exam scores.
 
-## 7. Final Thoughts & Limits
+## 7. Final Thoughts & Limitations
 
-The results show why evaluating AI-based learning requires careful thought. In this dataset, the large differences in practice exam scores were followed by much smaller differences in raw exam averages. The predictive results also suggest that students’ academic background and session context are useful for understanding performance.
-
-The tuned Gradient Boosting model achieved a reported test R² of 0.5445 and MAE of 15.32 percentage points. Session averages declined in the later assessments, but that descriptive pattern cannot establish a decline in learning or identify its cause.
+The results show why evaluating AI-based learning requires careful analysis. In this dataset, the large differences in practice exam scores were followed by much smaller differences in raw exam averages. The predictive results suggest that students’ academic background and session context are very useful for understanding academic performance, perhaps even more so than generative AI usage. However, that cannot be completely concluded as of this point in time.
 
 Several limitations affect how these findings should be used. The study represents a particular school, in a particular country, using a particular teaching style. Performance somewhere else may differ. Excluding the incomplete surveys can also introduce selection bias. Surveys are self-reported, and post-exam responses restrict when the survey model could be used. It would be nice to have a more complete set of survey responses, as well as more questions that could delve deeper into how the students use generative AI for school.
 
 Bastani et al. (2025), whose experiment supplied this dataset, found that unrestricted AI assistance could improve assisted performance while harming subsequent independent performance. In another setting, Kestin et al. (2025) found that a deliberately designed AI tutor improved learning relative to an active-learning class in college physics. These studies involved different students and instructional designs, so their results should not be treated as interchangeable. Together, they motivate examining how an AI tool is used and how learning is assessed. UNESCO’s guidance also emphasizes human oversight, privacy, and educational purpose when adopting generative AI (Miao & Holmes, 2023).
 
-In the end, the model should not determine grades, restrict opportunities, or define the students’ ability. Educational use would require stronger validation, privacy safeguards, and evaluation of errors across relevant student groups. Individual student identifiers should not appear in public prediction examples.
+Educational use would require stronger privacy safeguards and restrictions on the actions that can take place based on the model's predictions. The model should not determine grades or define the students’ ability. After all, the goal is to build up the students' education and knowledge, regardless of whether it is done using generative AI or not.
 
 ## References & Code
 
 - Bastani, H., Bastani, O., Sungu, A., Ge, H., Kabakcı, Ö., & Mariman, R. (2025). Generative AI without guardrails can harm learning: Evidence from high school mathematics. _Proceedings of the National Academy of Sciences, 122_(26), e2422633122. https://doi.org/10.1073/pnas.2422633122
 - Kestin, G., Miller, K., Klales, A., Milbourne, T., & Ponti, G. (2025). AI tutoring outperforms in-class active learning: An RCT introducing a novel research-based design in an authentic educational setting. _Scientific Reports, 15_, Article 17458. https://doi.org/10.1038/s41598-025-97652-6
-- Miao, F., & Holmes, W. (2023). _Guidance for generative AI in education and research._ UNESCO. https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research
+- Miao, F., & Holmes, W. (2023). _Guidance for generative AI in education and research_. UNESCO. https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research
 - Sagasta Pereira, V. (2026, June 19). _Can generative AI harm student learning?_ CMU S&DS Data Repository. https://cmustatistics.github.io/data-repository/technology/ai-learning.html
 
 **Jupyter Notebook Code:** [Link](https://github.com/Joey019/data-science-portfolio/blob/main/project/project2/Research.ipynb)
