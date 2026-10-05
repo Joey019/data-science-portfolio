@@ -108,21 +108,23 @@ pre {
 pre code { background: none; padding: 0; color: inherit; }
 
 table {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   margin: 1.4em 0;
   font-size: 0.93rem;
   border-collapse: collapse;
 }
 th, td {
   border: 1px solid var(--color-border);
-  padding: 0.55em 0.8em;
-  text-align: left;
+  padding: 0.55em 1em;
 }
+td { text-align: right; }
 thead th {
   background: var(--color-bg-alt);
   font-weight: 700;
   color: var(--color-text);
   white-space: nowrap;
+  text-align: center !important;
 }
 tbody tr:nth-child(even) { background: var(--color-bg-alt); }
 
