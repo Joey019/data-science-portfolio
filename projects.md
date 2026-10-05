@@ -4,7 +4,7 @@ title: Projects
 ---
 
 # Projects
-A showcase of my work,from ideas to implementation.
+A showcase of my work, from ideas to implementation.
 
 ---
 {% for project in site.data.projects %}
