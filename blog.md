@@ -4,7 +4,7 @@ title: Blog
 ---
 
 # Blog
-Throughout this course, I will write posts about data science topics I am interested in.
+Thoughts,ideas,and lessons from my journey in tech and data.
 <div class="card-grid">
 <div class="card">
 <h3><a href="blog/blog1.md">What is Data Science to Me?</a></h3>
